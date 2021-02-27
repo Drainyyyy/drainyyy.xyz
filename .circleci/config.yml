@@ -13,7 +13,7 @@ jobs:
       - python/save-cache
       - run:
           name: "Start app.py"
-          command: py app.py
+          command: python app.py
 
 workflows:
   "Website Dev Stage":
