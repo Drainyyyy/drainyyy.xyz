@@ -2,7 +2,7 @@
 
 #  Covered by The MIT License (MIT)
 #
-#  Copyright 2020 Drainyyy
+#  Copyright 2021 Jörg Reinhardt (Drainyyy)
 #
 #  Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files
 #  (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge,
@@ -17,15 +17,17 @@
 #  CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 #  DEALINGS IN THE SOFTWARE.
 
-from flask import Flask
+__all__ = ["FLASK_SSH_ENABLED", "FLASK_RUN_CONFIG"]
 
-app = Flask(__name__)
+# FLASK
 
+FLASK_SSH_ENABLED = False
 
-@app.route('/')
-def hello_world():
-    return 'Hello World!'
+FLASK_RUN_CONFIG = {
+    "host": "localhost",
+    "port": 25163,
+    "debug": True
+}
 
-
-if __name__ == '__main__':
-    app.run()
+if FLASK_SSH_ENABLED is True:
+    FLASK_RUN_CONFIG["ssl_context"] = "adhoc"
