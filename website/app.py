@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 
-#  Covered by The MIT License (MIT)
+#  Covered by The MIT License
 #
-#  Copyright 2021 Jörg Reinhardt (Drainyyy)
+#  Copyright 2021 Jörg R.
 #
 #  Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files
 #  (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge,
@@ -17,7 +17,8 @@
 #  CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 #  DEALINGS IN THE SOFTWARE.
 
-from flask import Flask, redirect
+from flask import Flask, redirect, render_template
+from markupsafe import escape
 
 from website import config
 
@@ -29,7 +30,7 @@ app = Flask(__name__)
 @app.route("/")
 def index():
     """TODO docs"""
-    return "Welcome to my website."
+    return render_template("index.html", base=config.BASE_URL)
 
 
 @app.route("/about")
@@ -41,13 +42,22 @@ def about():
 @app.route("/contact")
 def contact():
     """TODO docs"""
-    return "Contact me"
+    return render_template("contact.html", base=config.BASE_URL, dc_server_id=config.DC_SERVER_ID, dc_user_id=config.DC_USER_ID,
+                           contact_email=config.EMAIL_ADDRESS)
 
 
 @app.route("/blog")
 def blog():
     """TODO docs"""
     return "Personal blog"
+
+
+@app.route("/blog/<article>")
+def blog_article(article: str):
+    """TODO docs"""
+    # TODO check first if article exists and then show reading preview before showing the whole article
+    article = article[:-5] if article.endswith(".html") else article
+    return render_template(f"blog/{article}.html")
 
 
 @app.route("/projects")
@@ -59,7 +69,7 @@ def projects():
 @app.route("/projects/<specific_project>")
 def project(specific_project: str):
     """TODO docs"""
-    known_projects = {
+    known_projects = {  # TODO move to database
         "example": {"full_name": "The example project",
                     "keywords": ["example", "example.com", "example project"],
                     "short_desc": "An example project",
@@ -75,9 +85,9 @@ def project(specific_project: str):
                                  "Johnny Doe": "https://johnny-doe.example.com"},
                     }
     }
-    if specific_project not in known_projects:
+    if escape(specific_project) not in known_projects:
         return redirect("/projects")
-    return known_projects[specific_project]["full_name"]
+    return known_projects[escape(specific_project)]["full_name"]
 
 
 @app.route("/status")
@@ -98,15 +108,21 @@ def privacy():
     return "privacy policy"
 
 
-@app.route("/<to>", subdomain="re")  # TODO NOT WORKING -> redirect if unknown only to re.localhost instead of localhost
+@app.route("/r/<to>")
 def dynamic_redirect(to: str):
     """TODO docs"""
-    known_redirects = {
-        "example": {"url": "https://www.example.com/"}
+    known_redirects = {  # TODO move to database
+        "example": {"url": "https://www.example.com/", "third_party_service": None},
+        "status": {"url": "https://stats.uptimerobot.com/qp0w9S1PzL", "third_party_service": "UptimeRobot"},
+        "discord": {"url": "https://discord.gg/JR7tSXgM7Y", "third_party_service": "Discord"}
     }
-    if to not in known_redirects:
-        return redirect("/")
-    return redirect(known_redirects[to]["url"])
+    if to not in known_redirects or None:
+        return redirect(config.BASE_URL)
+
+    destination = known_redirects[to]
+    if destination["third_party_service"] is not None:
+        return render_template("redirect-warning.html", base=config.BASE_URL, url=destination["url"], service=destination["third_party_service"])
+    return redirect(destination["url"])
 
 
 # Login pages
@@ -114,6 +130,7 @@ def dynamic_redirect(to: str):
 @app.route("/login")
 def login():
     """TODO docs"""
+    # TODO add reCaptcha for login
     return "Login page"
 
 
@@ -121,6 +138,13 @@ def login():
 def aoi():
     """TODO docs"""
     return "administrative operations interface"
+
+
+@app.route("/status", subdomain="aoi")
+def aoi_status():
+    """TODO docs"""
+    # TODO get information from uptime robot api and project it on graphs -> Information from srv1 and srv2 and not only homepage
+    return "aoi status page"
 
 
 @app.route("/", subdomain="cms")
@@ -138,6 +162,8 @@ def chat():
 def init_app():
     """TODO docs"""
     app.config["SERVER_NAME"] = f"{config.FLASK_RUN_CONFIG['host']}:{config.FLASK_RUN_CONFIG['port']}"
+    if config.FLASK_SSH_ENABLED is True:
+        app.config["ssl_context"] = "adhoc"
 
 
 if __name__ == "__main__":

@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 
-#  Covered by The MIT License (MIT)
+#  Covered by The MIT License
 #
-#  Copyright 2021 Jörg Reinhardt (Drainyyy)
+#  Copyright 2021 Jörg R.
 #
 #  Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files
 #  (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge,
@@ -17,17 +17,22 @@
 #  CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 #  DEALINGS IN THE SOFTWARE.
 
-__all__ = ["FLASK_SSH_ENABLED", "FLASK_RUN_CONFIG"]
+__all__ = ["FLASK_SSH_ENABLED", "FLASK_RUN_CONFIG", "BASE_URL", "DC_SERVER_ID", "DC_USER_ID", "EMAIL_ADDRESS"]
+
 
 # FLASK
-
 FLASK_SSH_ENABLED = False
 
 FLASK_RUN_CONFIG = {
-    "host": "localhost",
+    "host": "drainyyy.test",
     "port": 25163,
     "debug": True
 }
 
-if FLASK_SSH_ENABLED is True:
-    FLASK_RUN_CONFIG["ssl_context"] = "adhoc"
+# GENERAL
+BASE_URL = FLASK_RUN_CONFIG["host"]  # TODO change to domain before deploy
+
+# Contact
+DC_SERVER_ID = "544615795754270731"
+DC_USER_ID = "249221746006163467"
+EMAIL_ADDRESS = "contact@drainyyy.xyz"
