@@ -1,0 +1,286 @@
+/*!
+ * Covered by The MIT License
+ *
+ * Copyright 2021 Jörg R.
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files
+ * (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge,
+ * publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so,
+ * subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE
+ * WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
+ * CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+ * DEALINGS IN THE SOFTWARE.
+ */
+
+@use "resources" as res;
+@use "utils";
+
+// TODO Remove unnecessary copyright statements from css files in website/static/css/
+
+html {
+    height: 100%;
+}
+
+body {
+    background-color: res.$background-color;
+    background-image: url(../img/noise.png);
+    background-position: center;
+    background-repeat: repeat;
+    background-size: auto;
+
+    color: res.$primary-color;
+    font-family: res.$primary-font;
+
+    min-height: 100vh;
+    position: relative;
+    padding-bottom: res.$footer-height;
+
+    @include utils.same-margin-padding(0);
+}
+
+::selection  {
+    background-color: res.$secondary-rgb;
+    color: res.$primary-color;
+}
+
+::-moz-selection {
+    background-color: res.$secondary-rgb;
+    color: res.$primary-color;
+}
+
+@for $i from 1 through 6 {
+    h#{$i} {
+        @if $i == 1 {
+            color: res.$secondary-color;
+        }
+        @if $i >= 3 {
+            margin: 1em 0 0.25em 0;
+        }
+        font-weight: res.$base-font-weight + res.$heading-weight-scale * (7 - $i);
+        font-size: res.$base-font-size + res.$heading-size-scale * (7 - $i);
+        font-family: res.$secondary-font;
+    }
+}
+
+p {
+    font-size: res.$base-font-size + 4;
+    color: res.$text-color;
+    margin: 0.1em;
+}
+
+a {
+    transition: res.$transition-out;
+    
+    text-decoration: none;
+    color: res.$primary-color;
+    padding: 1px;
+
+    /* Background */
+    border: 1px solid rgba(0, 0, 0, 0);
+    border-radius: 2px;
+
+    &:hover {
+        transition: res.$transition-out;
+        background-color: res.$secondary-color;
+        color: white;
+    }
+}
+
+hr {
+    border: None;
+    border-bottom: 1px solid res.$special-gray;
+    margin: 0 0 1em 0;
+}
+
+mark {
+    padding: 2px;
+    background-color: res.$background-color;
+    color: res.$primary-color;
+    border-radius: 2px;
+}
+
+button {
+    cursor: pointer;
+}
+
+header {
+    position: relative;
+    text-align: center;
+    margin: 5rem auto;
+}
+
+
+button.sign-in {
+    transition: res.$transition-out;
+
+    font-family: res.$secondary-font;
+    font-size: res.$base-font-size + 8px;
+    font-weight: bold;
+    padding: 6px;
+
+    color: white;
+    background-color: transparent;
+    border: 3px solid res.$secondary-color;
+    border-radius: 2px;
+    outline: none;
+
+    &:hover {
+        transition: res.$transition-out;
+        color: res.$secondary-bg;
+        background-color: res.$secondary-color;
+        border-radius: 30px;
+    }
+}
+
+nav {
+    display: flex;
+    position: relative;
+    align-items: center;
+    
+    @include utils.same-margin-padding(0);
+
+    border-bottom: 1px solid res.$secondary-color;
+    background-color: res.$bar-bg-rgb;
+
+    img {
+        transition: res.$transition-out;
+        @include utils.same-width-height(64px);
+        margin: 0 1em;
+
+        &:hover {
+            transition: res.$transition-in;
+            transform: translateX(res.$transition-distance);
+        }
+    }
+
+    ul {
+        margin: 0 1% 0 auto;
+        list-style: none;
+    }
+
+    li {
+        display: inline-block;
+    }
+
+    a {
+        padding: 16px;
+        margin: 0;
+
+        &.on_page {
+            color: res.$special-gray;
+            &:hover {
+                color: res.$primary-color;
+            }
+        }
+    }
+
+    h3 {
+        @include utils.same-margin-padding(5px)
+    }
+}
+
+%main-section {
+    transition: res.$transition-out;
+    padding: 1em 3em;
+    margin-bottom: 8em;
+    background-color: res.$secondary-bg;
+
+    border-top: 5px solid res.$secondary-color;
+
+    &:hover {
+        transition: res.$transition-in;
+        border-color: res.$special-yellow;
+    }
+}
+
+section.flex {
+    display: flex;
+    p {
+        margin: 1em;
+    }
+}
+
+main {
+    margin: 5em auto;
+    width: 60em;
+
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+
+    section.article {
+        @extend %main-section;
+    }
+
+    article {
+        @extend %main-section;
+        width: clamp(45ch, 50%, 75ch);
+    }
+}
+
+section.redirect-warning {
+    form {
+        display: inline;
+    }
+    button {
+        transition: res.$transition-out;
+
+        font-family: res.$secondary-font;
+        font-size: res.$base-font-size + 8px;
+        font-weight: bold;
+
+        padding: .5em;
+        margin: 1em;
+
+        color: white;
+        background-color: transparent;
+        border: 3px solid;
+        border-radius: 2px;
+
+        &#yes {
+            border-color: res.$special-yellow;
+            &:hover {
+                transition: res.$transition-in;
+                color: res.$secondary-bg;
+                background-color: res.$special-yellow;
+                border-radius: 30px;
+            }
+        }
+        &#no {
+            border-color: res.$secondary-color;
+            &:hover {
+                transition: res.$transition-in;
+                color: res.$secondary-bg;
+                background-color: res.$secondary-color;
+                border-radius: 30px;
+            }
+        }
+    }
+}
+
+footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-top: 1px solid res.$secondary-color;
+    background-color: res.$bar-bg-rgb;
+
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: res.$footer-height;
+
+    padding: 1px;
+
+    p {
+        color: res.$special-gray;
+        font-size: res.$base-font-size;
+    }
+}

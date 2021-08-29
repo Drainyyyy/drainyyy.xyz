@@ -1,0 +1,106 @@
+<!--
+  ~ Covered by The MIT License
+  ~
+  ~ Copyright 2021 Jörg R.
+  ~
+  ~ Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files
+  ~ (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge,
+  ~ publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so,
+  ~ subject to the following conditions:
+  ~
+  ~ The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+  ~
+  ~ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE
+  ~ WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+  ~ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
+  ~ CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+  ~ DEALINGS IN THE SOFTWARE.
+  -->
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <!-- Primary Meta Tags -->
+        <title>Contact</title>
+        <meta name="title" content="Contact">
+        <meta name="description" content="If you have found a bug in one of my projects,
+        have a question about something or want to contact me for any other reason, you will find a suitable way to do so here.">
+        <meta name="keywords" content="Drainyyy, Jörg R, Joerg R, , Developer, Programmer, Python, Web Development, Security, Contact, Mail">
+        <meta name="author" content="Joerg R. (Drainyyy)">
+
+        <!-- Open Graph / Facebook -->
+        <meta property="og:type" content="website">
+        <meta property="og:url" content="{{ base }}/contact">
+        <meta property="og:title" content="Contact">
+        <meta property="og:description" content="If you have found a bug in one of my projects,
+        have a question about something or want to contact me for any other reason, you will find a suitable way to do so here.">
+        <meta property="og:image" content="{{ url_for('static', filename='img/metatags.jpg') }}">
+
+        <!-- Twitter -->
+        <meta property="twitter:card" content="summary_large_image">
+        <meta property="twitter:url" content="{{ url_for('static', filename='img/metatags.jpg') }}">
+        <meta property="twitter:title" content="Contact">
+        <meta property="twitter:description" content="If you have found a bug in one of my projects,
+        have a question about something or want to contact me for any other reason, you will find a suitable way to do so here.">
+        <meta property="twitter:image" content="{{ url_for('static', filename='img/metatags.jpg') }}">
+
+        <!-- Favicon -->
+        <link rel="apple-touch-icon" sizes="180x180" href="{{ url_for('static', filename='img/favicon/apple-touch.icon.png') }}">
+        <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static', filename='img/favicon/favicon-32x32.png') }}">
+        <link rel="icon" type="image/png" sizes="16x16" href="{{ url_for('static', filename='img/favicon/favicon-16x16') }}">
+        <link rel="manifest" href="{{ url_for('static', filename='img/favicon/site.webmanifest') }}">
+
+        <meta charset="UTF-8">
+        <base href="{{ base }}" target="_blank">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    </head>
+
+    <body>
+        <nav>
+            <img src="{{ url_for('static', filename='img/logo/colored_nobg.png') }}" alt="Logo">
+            <h3>Contact</h3>
+            <ul>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Projects</a></li>
+                <li><a href="#">Blog</a></li>
+                <li><a href="#">Media</a></li>
+                <li><a href="r/status" target="_blank">Status</a></li>
+                <li><a href="contact" target="_blank" class="on_page">Contact</a></li>
+                <button class="sign-in">Sign in</button>
+            </ul>
+        </nav>
+
+        <main>
+            <section class="article">
+                <h2>Contact me</h2>
+                <hr>
+                <p>If you have any questions regarding one of my projects or want to contact me for any other reason,
+                    you can do so through one of the following ways:</p>
+                <h4>Discord</h4>
+                <section class="flex">
+                    <aside>
+                        <iframe src="https://discord.com/widget?id={{ dc_server_id }}&theme=dark" width="350" height="350" allowtransparency="true"
+                                frameborder="0" sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"></iframe>
+                    </aside>
+                    <p>You can join my Discord server at any time and just write in one of the channels. I will respond as soon as possible
+                        and if it's a general question, maybe somebody of the other people on the server (if there is any - at the moment it's pretty
+                        empty on there) can answer.<br>
+                        To join the server simply click <mark>connect</mark> in the window on the left or use
+                        <nobr><a href="r/discord" target="_blank">this link</a></nobr>.</p>
+                </section>
+                <h4>Discord (2)</h4>
+                <p>If you want to message me in private, you can do so by sending me a private message on Discord as well.</p>
+                <p>Drainyyy#9339</p>
+                <!-- TODO add discord iframe or something of my profile with API fetched information (fetch username and tag etc. from ID) -->
+                <h4>Email</h4>
+                <p>Send here <a href="mailto:{{ contact_email }}">{{ contact_email }}</a></p>
+            </section>
+        </main>
+        <footer>
+            <p>Copyright &copy; 2021 Jörg R. All content rights reserved. Code is licensed under the
+                <a href="https://opensource.org/licenses/MIT" target="_blank">MIT licence.</a> | <a href="#">Imprint</a>
+            </p>
+        </footer>
+    </body>
+</html>

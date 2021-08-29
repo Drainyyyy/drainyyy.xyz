@@ -1,0 +1,46 @@
+/*!
+ * Covered by The MIT License
+ *
+ * Copyright 2021 Jörg R.
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files
+ * (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge,
+ * publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so,
+ * subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE
+ * WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
+ * CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+ * DEALINGS IN THE SOFTWARE.
+ */
+
+// Fonts
+@import url('https://fonts.googleapis.com/css2?family=Raleway&family=Roboto&display=swap');
+$secondary-font: "Raleway", Arial;
+$primary-font: "Roboto", "Times New Roman", sans-serif;
+$base-font-size: 12px;
+$base-font-weight: 400;
+$heading-size-scale: 4;
+$heading-weight-scale: 50;
+
+// Colors
+$background-color: #1d1d2b;
+$secondary-bg: #2e2e44;
+$primary-color: white;
+$secondary-color: #ff5d5d;
+$text-color: #bfbfbf;
+$special-pink: #FF4969;
+$special-yellow: #EFE463;
+$special-gray: #a7a7a7;
+//Rgb Colors
+$secondary-rgb: rgba(255, 93, 93, 0.99);
+$bar-bg-rgb: rgba(46, 46, 68, .35);
+
+//Misc
+$footer-height: 2.5em;
+$transition-in: .25s;
+$transition-out: .5s;
+$transition-distance: 10px;
